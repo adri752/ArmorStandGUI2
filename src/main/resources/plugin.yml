@@ -1,0 +1,10 @@
+name: ArmorStandGUI
+version: '${project.version}'
+main: me.fragment.armorstandgui.ArmorStandGUI
+api-version: 1.17
+commands:
+  armorstand:
+    description: Create an armor stand
+    usage: /<command>
+    aliases:
+      - as
