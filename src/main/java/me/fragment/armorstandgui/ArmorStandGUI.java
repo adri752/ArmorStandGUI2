@@ -3,13 +3,10 @@ package me.fragment.armorstandgui;
 import me.fragment.armorstandgui.commands.ArmorStandCommand;
 import me.fragment.armorstandgui.events.EventHandler3;
 import me.fragment.armorstandgui.events.MenuHandler;
-import me.fragment.armorstandgui.events.MenuHandler2;
-import me.fragment.armorstandgui.events.MenuHandler4;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,8 +19,12 @@ import java.util.UUID;
 
 public final class ArmorStandGUI extends JavaPlugin {
 
-    public HashMap<UUID, ArmorStand> armorstands = new HashMap<>();
     private static ArmorStandGUI instance;
+    public final HashMap<UUID, ArmorStand> armorstands = new HashMap<>();
+
+    public static ArmorStandGUI getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -33,12 +34,10 @@ public final class ArmorStandGUI extends JavaPlugin {
         getCommand("armorstand").setExecutor(new ArmorStandCommand(this));
 
         getServer().getPluginManager().registerEvents(new MenuHandler(this), this);
-        getServer().getPluginManager().registerEvents(new MenuHandler2(this), this);
         getServer().getPluginManager().registerEvents(new EventHandler3(this), this);
-        getServer().getPluginManager().registerEvents(new MenuHandler4(this), this);
     }
 
-    public void openMainMenu(Player p){
+    public void openMainMenu(Player p) {
         Inventory main_menu = Bukkit.createInventory(p, 9, ChatColor.GOLD + "Armor Stand GUI");
 
 
@@ -61,7 +60,8 @@ public final class ArmorStandGUI extends JavaPlugin {
         p.openInventory(main_menu);
 
     }
-    public void openCreateMenu(Player p){
+
+    public void openCreateMenu(Player p) {
         Inventory create_menu = Bukkit.createInventory(p, 9, ChatColor.GREEN + "Create an Armor Stand");
 
         ItemStack arms = new ItemStack(Material.GOLDEN_SWORD);
@@ -100,11 +100,11 @@ public final class ArmorStandGUI extends JavaPlugin {
         p.openInventory(create_menu);
     }
 
-    public void openConfirmMenu(Player p, Material option){
+    public void openConfirmMenu(Player p, Material option) {
         Inventory confirm_menu = Bukkit.createInventory(p, 36, ChatColor.GOLD + "Confirm your creation");
         ItemStack option_item = new ItemStack(option);
         ItemMeta option_meta = option_item.getItemMeta();
-        if(option == Material.GOLDEN_SWORD){
+        if (option == Material.GOLDEN_SWORD) {
             option_meta.setDisplayName(ChatColor.BLUE + "Give arms");
             option_item.setItemMeta(option_meta);
         } else if (option == Material.BEACON) {
@@ -133,7 +133,8 @@ public final class ArmorStandGUI extends JavaPlugin {
         p.openInventory(confirm_menu);
 
     }
-    public void openArmorMenu(Player p){
+
+    public void openArmorMenu(Player p) {
 
         Inventory armorMenu = Bukkit.createInventory(p, 45, ChatColor.BLUE + "Choose some armor.");
 
@@ -154,9 +155,5 @@ public final class ArmorStandGUI extends JavaPlugin {
         armorMenu.setItem(13, diamondLeg);
         armorMenu.setItem(44, confirm);
         p.openInventory(armorMenu);
-    }
-
-    public static ArmorStandGUI getInstance() {
-        return instance;
     }
 }
