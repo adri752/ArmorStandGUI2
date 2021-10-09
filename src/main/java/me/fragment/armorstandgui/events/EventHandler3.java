@@ -1,7 +1,6 @@
 package me.fragment.armorstandgui.events;
 
 import me.fragment.armorstandgui.ArmorStandGUI;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
@@ -10,6 +9,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+/**
+ * I didn't bother to check this class, but it's also a mess.
+ * Like... why do you literally check whether plugin.armorstands.containsKey(p)
+ * on every second line? Why don't you do it just once?
+ */
 public class EventHandler3 implements Listener {
 
     ArmorStandGUI plugin;
